@@ -18,8 +18,73 @@ for (var i=3; i<arg.length; i++) {
     liriArg += arg[i] + ' ';
 }
 
+controller(liriCmd, liriArg);
+
 //-------------------------------------------------------------------------
 //Functions
+
+function controller(liriCmd, liriArg) {
+    switch (liriCmd) {
+        case "my-tweets":
+        tweet();
+        break;
+
+        case "spotify-this-song":
+        spotify();
+        break;
+
+        case "movie-this":
+        movie();
+        break;
+
+        case "do-what-it-says":
+        doWhatItSays();
+        break;
+    }
+}
+
+//OMDB Function 
+function movie() {
+
+    var movieTitle = liriArg;
+    if (!movieTitle) {
+        movieTitle = "Mr. Nobody";
+    }
+
+    request("http://www.omdbapi.com/?t=" + movieTitle + "&type=movie&y=&plot=short&apikey=trilogy", function(error, response, body) {
+        if(!error && response.statusCode === 200) {
+            var movObj = JSON.parse(body);
+            // console.log(movObj);
+            var rottenTomReviews = '';
+            if (movObj.Ratings[1] == undefined) {
+                rottenTomReviews = "N/A"
+                
+            } else {
+                rottenTomReviews = movObj.Ratings[1].Value;
+            }
+
+            var movieResults = 
+            "Title: " + movObj.Title + "\r\n" +
+            "Year: " + movObj.Year + "\r\n" +
+            "IMDB Rating: " + movObj.Ratings[0].Value + "\r\n" +
+            "Rotten Tomatoes Rating: " + rottenTomReviews + "\r\n" +
+            "Country: " + movObj.Country + "\r\n" +
+            "Language: " + movObj.Language + "\r\n" +
+            "Plot: " + movObj.Plot + "\r\n" +
+            "Actors: " + movObj.Actors + "\r\n" +
+            "-----------------------------------------" + "\r\n"
+
+            console.log(movieResults);
+            liriArg = '';
+        }
+    });
+
+
+}
+
+
+
+
 //Twitter function
 function tweet() {
 
@@ -60,6 +125,10 @@ function tweet() {
 //Spotify function 
 function spotify(songName) {
     var songName = liriArg;
+
+    if (!songName) {
+        songName = "The Sign Ace of Base"
+    };
     
     var spotify = new Spotify(keys.spotify);
 
@@ -68,7 +137,7 @@ function spotify(songName) {
           
             var songData = data.tracks.items;
             // console.log(JSON.stringify(songData[0], null, 2));
-            for(var i=0; i<5; i++) {
+            for(var i=0; i<1; i++) {
                 if (songData[i] != undefined) {
                     // console.log(JSON.stringify(data.tracks.items, null, 2));
 
@@ -96,9 +165,31 @@ function spotify(songName) {
       liriArg = '';
 }
 
+function doWhatItSays() {
+    fs.readFile("random.txt", "utf8", function(error, data) {
+        if (!error) {
 
-if (liriCmd === 'my-tweets') {
-    tweet();
-} else if (liriCmd === 'spotify-this-song') {
-    spotify();
+            // console.log(data.split(','));
+            var dataArray = data.split(',');
+            var randomCmd = dataArray[0];
+            var randomArg = dataArray[1];
+
+           controller(randomCmd, randomArg);
+
+        }
+
+    })
+
+
 }
+
+
+// if (liriCmd === 'my-tweets') {
+//     tweet();
+// } else if (liriCmd === 'spotify-this-song') {
+//     spotify();
+// } else if (liriCmd === 'movie-this') {
+//     movie();
+// } else if (liriCmd === 'do-what-it-says') {
+//     doWhatItSays();
+// }
