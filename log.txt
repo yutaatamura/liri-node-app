@@ -1,16 +1,11 @@
-User Command: node liri.js my-tweets
-
-User Command: node liri.js my-tweets
-
-User Command: node liri.js my-tweets
-
-User Command: node liri.js my-tweets
-
-User Command: node liri.js my-tweets
-
-User Command: node liri.js my-tweets
-
-User Command: node liri.js my-tweets
-
-User Command: node liri.js my-tweets
-
+Artist: Kendrick Lamar
+Song: DNA.
+Preview URL: null
+Album: DAMN.
+---------------------1---------------------
+@amidaseed: DANGO
+Created: Wed Apr 04 15:10:39
+------------1---------------
+@amidaseed: ONIGIRI
+Created: Wed Apr 04 15:10:16
+------------2---------------

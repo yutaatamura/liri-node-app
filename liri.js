@@ -75,6 +75,7 @@ function movie() {
             "-----------------------------------------" + "\r\n"
 
             console.log(movieResults);
+            log(movieResults);
             liriArg = '';
         }
     });
@@ -87,11 +88,6 @@ function movie() {
 
 //Twitter function
 function tweet() {
-
-    fs.appendFile('./log.txt', 'User Command: node liri.js my-tweets\n\n', (err) => {
-		if (err) throw err;
-	});
-
 
     var client = new Twitter(keys.twitter);
     var twitterUN = liriArg;
@@ -113,9 +109,11 @@ function tweet() {
         "------------" + (i+1) + "---------------" + "\r\n";
 
         console.log(twitterResults);
+        log(twitterResults);
     }
     } else {
        console.log("Error: " + error);
+        log(error);
        return; 
     }
     });
@@ -151,12 +149,14 @@ function spotify(songName) {
                     "Album: " + songData[i].album.name + "\r\n" +
         "---------------------" + (i+1) + "---------------------" + "\r\n";
                     console.log(spotifyResults);
+                    log(spotifyResults);
                 }
             }
             
         }
         else {
             console.log('Error occurred: ' + err);
+            log(err);
             return;
           } 
        
@@ -176,11 +176,25 @@ function doWhatItSays() {
 
            controller(randomCmd, randomArg);
 
+        } else {
+            console.log("Error: " + error);
+            log(error);
+            return;
         }
 
     })
 
 
+}
+
+function log(results) {
+    fs.appendFile("log.txt", results, function(err) {
+
+        if (err) {
+           console.log(err);
+           return;
+        }
+    });
 }
 
 
