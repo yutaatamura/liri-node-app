@@ -63,16 +63,17 @@ function movie() {
                 rottenTomReviews = movObj.Ratings[1].Value;
             }
 
-            var movieResults = 
-            "Title: " + movObj.Title + "\r\n" +
-            "Year: " + movObj.Year + "\r\n" +
-            "IMDB Rating: " + movObj.Ratings[0].Value + "\r\n" +
-            "Rotten Tomatoes Rating: " + rottenTomReviews + "\r\n" +
-            "Country: " + movObj.Country + "\r\n" +
-            "Language: " + movObj.Language + "\r\n" +
-            "Plot: " + movObj.Plot + "\r\n" +
-            "Actors: " + movObj.Actors + "\r\n" +
-            "-----------------------------------------" + "\r\n"
+            var movieResults = `
+            Title:   ${movObj.Title}   
+            Year:   ${movObj.Year}   
+            IMDB Rating:   ${movObj.Ratings[0].Value}   
+            Rotten Tomatoes Rating:   rottenTomReviews   
+            Country:   ${movObj.Country}   
+            Language:   ${movObj.Language}   
+            Plot:   ${movObj.Plot}   
+            Actors:   ${movObj.Actors}   
+            -----------------------------------------  
+            `
 
             console.log(movieResults);
             log(movieResults);
