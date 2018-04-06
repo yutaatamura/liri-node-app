@@ -63,17 +63,17 @@ function movie() {
                 rottenTomReviews = movObj.Ratings[1].Value;
             }
 
-            var movieResults = `
-            Title:   ${movObj.Title}   
-            Year:   ${movObj.Year}   
-            IMDB Rating:   ${movObj.Ratings[0].Value}   
-            Rotten Tomatoes Rating:   rottenTomReviews   
-            Country:   ${movObj.Country}   
-            Language:   ${movObj.Language}   
-            Plot:   ${movObj.Plot}   
-            Actors:   ${movObj.Actors}   
-            -----------------------------------------  
-            `
+var movieResults =`
+Title:   ${movObj.Title}   
+Year:   ${movObj.Year}   
+IMDB Rating:   ${movObj.Ratings[0].Value}   
+Rotten Tomatoes Rating: `+rottenTomReviews+`   
+Country:   ${movObj.Country}   
+Language:   ${movObj.Language}   
+Plot:   ${movObj.Plot}   
+Actors:   ${movObj.Actors}   
+-----------------------------------------  
+`
 
             console.log(movieResults);
             log(movieResults);
@@ -83,8 +83,6 @@ function movie() {
 
 
 }
-
-
 
 
 //Twitter function
@@ -104,10 +102,11 @@ function tweet() {
     for (var i=0; i<tweets.length; i++) {
         var date = tweets[i].created_at;
 
-        var twitterResults = 
-        
-        "@"+ tweets[i].user.screen_name + ": " + tweets[i].text + "\r\n" + "Created: " + date.substring(0, 19) + "\r\n" +
-        "------------" + (i+1) + "---------------" + "\r\n";
+var twitterResults = `        
+@${tweets[i].user.screen_name}: ${tweets[i].text} 
+Created: ${date.substring(0, 19)}
+------------ `+(i+1)+` ---------------
+`
 
         console.log(twitterResults);
         log(twitterResults);
@@ -140,15 +139,13 @@ function spotify(songName) {
                 if (songData[i] != undefined) {
                     // console.log(JSON.stringify(data.tracks.items, null, 2));
 
-                    var spotifyResults = 
-                    "Artist: " + songData[i].artists[0].name + "\r\n" +
+var spotifyResults = `
+Artist:  ${songData[i].artists[0].name}   
+Song:  ${songData[i].name}   
+Preview URL:  ${songData[i].preview_url}   
+Album:  ${songData[i].album.name}   
+------------------------------------------` 
 
-                    "Song: " + songData[i].name + "\r\n" +
-
-                    "Preview URL: " + songData[i].preview_url + "\r\n" +
-
-                    "Album: " + songData[i].album.name + "\r\n" +
-        "---------------------" + (i+1) + "---------------------" + "\r\n";
                     console.log(spotifyResults);
                     log(spotifyResults);
                 }
